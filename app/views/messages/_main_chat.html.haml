@@ -2,32 +2,24 @@
   .chat-main__group-info
     .left-header
       .group-title
-        グループ名
-      .group-member 
-        Member : ユーザー名
+        %h2 #{@group.name}
+      .group-member
+        Member :
+        - @group.users.each do |user|
+          %span.chat-header__user #{user.name}
     .right-header 
       .group-edit-btn
-        = link_to "#", class:"edit" do
+        = link_to edit_group_path(current_user.id), class: 'edit' do
           Edit
   .chat-main__message-list
-    .message
-      .message-top
-        .name ユーザー名 
-        .date 2020/06/22(Mon) 00:00:01
-      .message-bottom おはよう！
-      .message-top
-        .name ユーザー名 
-        .date 2020/06/22(Mon) 00:00:01
-      .message-bottom おはよう！
-      .message-top
-        .name ユーザー名 
-        .date 2020/06/22(Mon) 00:00:01
-      .message-bottom おはよう！
+    = render @messages
   .chat-main__message-form
-    %form.new_message
+    .new_message
       .form
-        %input{type:"text", class:"form__text", placeholder:"type a message"}
-        %label{class:"form__image"}
-          = icon('far','image')
-          %input{type:"file", class:"form__image--file"}
-      %input{type:"submit", value:"Send", class:"submit-btn"}
+        = form_for [@group, @message] do |f|
+          .form-image
+            = f.text_field :content, class: 'form-image__text', placeholder: 'type a message'
+            = f.label :image, class: 'form-image__label' do
+              = icon('far', 'image', class: 'form-image__label--icon')
+              = f.file_field :image, class: 'form-image__label--file'
+          = f.submit 'Send', class: 'submit-btn'
