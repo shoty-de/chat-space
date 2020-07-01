@@ -10,11 +10,11 @@
   .side-bar__group-list
     - current_user.groups.each do |group|
       .side-bar__contents
-        = link_to "#", class: "group" do
+        = link_to group_messages_path(group), class: 'group' do
           .side-bar__contents__name
             = group.name
           .side-bar__contents__message
-            まだメッセージがありません
+            = group.show_last_message
       -# .side-bar__contents
       -#   = link_to "#", class: "group" do
       -#     .side-bar__contents__name グループ2
