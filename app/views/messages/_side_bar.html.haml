@@ -1,7 +1,8 @@
 .side-bar
   .side-bar__user-name
     .top-items
-      .top-items__name ユーザー名
+      .top-items__name
+        = current_user.name
       .top-items__icons
         = link_to new_group_path do
           = icon('fa', 'edit', class: "icon")
