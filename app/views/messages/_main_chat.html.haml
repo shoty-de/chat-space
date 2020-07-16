@@ -9,7 +9,7 @@
           %span.chat-header__user #{user.name}
     .right-header 
       .group-edit-btn
-        = link_to edit_group_path(current_user.id), class: 'edit' do
+        = link_to edit_group_path(@group.id), class: 'edit' do
           Edit
   .chat-main__message-list
     = render @messages
